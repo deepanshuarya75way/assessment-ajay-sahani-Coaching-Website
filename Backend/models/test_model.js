@@ -22,6 +22,8 @@ const testSchema = new mongoose.Schema(
           D: String,
         },
         correctAnswer: String,
+        // optional teacher-written explanation (overrides the AI one)
+        explanation: { type: String, default: "" },
         image: {
           type: String, // Cloudinary URL
           default: null, // optional

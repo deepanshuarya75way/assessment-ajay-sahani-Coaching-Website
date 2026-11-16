@@ -4,6 +4,7 @@ import axios from "axios";
 import { STUDENT_API_END_POINT } from "../../utils/constants";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, XCircle, X } from "lucide-react";
+import ExplanationPanel from "../Teacher/ExplanationPanel";
 
 export default function TestReview() {
   const { resultId } = useParams();
@@ -247,6 +248,15 @@ export default function TestReview() {
                   );
                 })}
               </ul>
+
+              {/* Explainable feedback: shown for wrong and skipped questions */}
+              {!isCorrect && (
+                <ExplanationPanel
+                  key={currentQuestion}
+                  resultId={resultId}
+                  questionIndex={currentQuestion}
+                />
+              )}
             </div>
           </motion.div>
         </AnimatePresence>

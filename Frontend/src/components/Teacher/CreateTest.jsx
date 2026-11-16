@@ -17,6 +17,7 @@ function CreateTest() {
       question: "",
       options: { A: "", B: "", C: "", D: "" },
       correctAnswer: "",
+      explanation: "",
       image: null, 
     },
   ]);
@@ -104,6 +105,7 @@ function CreateTest() {
         question: "",
         options: { A: "", B: "", C: "", D: "" },
         correctAnswer: "",
+        explanation: "",
         image: null,
       },
     ]);
@@ -134,10 +136,11 @@ function CreateTest() {
       formData.append(
         "questions",
         JSON.stringify(
-          questions.map(({ question, options, correctAnswer }) => ({
+          questions.map(({ question, options, correctAnswer, explanation = "" }) => ({
             question,
             options,
             correctAnswer,
+            explanation,
             // ⬅️ don't include image here (we send separately below)
           }))
         )
@@ -277,6 +280,15 @@ function CreateTest() {
               <option value="C">C</option>
               <option value="D">D</option>
             </select>
+
+            {/* Optional custom explanation (overrides the AI explanation for students) */}
+            <textarea
+              className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-black dark:text-white p-2 w-full mb-2 rounded"
+              rows={3}
+              placeholder="Custom explanation for students (optional). Put each step on a new line."
+              value={q.explanation || ""}
+              onChange={(e) => handleQuestionChange(qIndex, "explanation", e.target.value)}
+            />
 
             {/* Optional image upload */}
             <input

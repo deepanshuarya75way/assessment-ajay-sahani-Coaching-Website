@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
@@ -10,10 +11,11 @@ import resultRoutes from "./routes/results_routes.js"
 import noteRoutes from "./routes/note.routes.js"
 // import classRoutes from "./routes/classRoutes.js";
 // import studentRoutes from "./routes/studentRoutes.js";
-import noticeRoutes from "./routes/noticeRoutes.js"; // ✅ changed require -> import
+import noticeRoutes from "./routes/noticeRoutes.js"; 
 // ai test 
 import aitestRoutes from "./routes/aitest.routes.js";
 import chatRoutes from "./routes/chatRoutes.js"
+import explanationRoutes from "./routes/explainationRoutes.js";
 
 
 dotenv.config({});
@@ -58,6 +60,7 @@ app.use("/api", chatRoutes);
 
 //ai test
 app.use("/api/v1/aitest", aitestRoutes);
+app.use("/api/v1/explain", explanationRoutes);
 
 
 "http://localhost:8000/api/v1/user/register"

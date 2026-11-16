@@ -77,6 +77,7 @@ export const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
+    console.log(safeUser)
 
     // Send cookie + user data
     return res

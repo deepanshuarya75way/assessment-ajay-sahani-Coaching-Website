@@ -36,6 +36,7 @@ function EditTest() {
               D: q.options?.D || "",
             },
             correctAnswer: q.correctAnswer || "",
+            explanation: q.explanation || "",
             existingImage: q.image || null, // ⬅️ image already uploaded (URL)
             image: null, // ⬅️ new file, if teacher replaces it
           }))
@@ -76,6 +77,7 @@ function EditTest() {
         question: "",
         options: { A: "", B: "", C: "", D: "" },
         correctAnswer: "",
+        explanation: "",
         existingImage: null,
         image: null,
       },
@@ -104,10 +106,11 @@ function EditTest() {
       formData.append(
         "questions",
         JSON.stringify(
-          questions.map(({ question, options, correctAnswer, existingImage, image }) => ({
+          questions.map(({ question, options, correctAnswer, explanation = "", existingImage, image }) => ({
             question,
             options,
             correctAnswer,
+            explanation,
             // keep existing image URL unless a new file is being uploaded
             image: image ? null : existingImage,
           }))
@@ -237,6 +240,15 @@ function EditTest() {
               <option value="C">C</option>
               <option value="D">D</option>
             </select>
+
+            {/* Optional custom explanation (overrides the AI explanation for students) */}
+            <textarea
+              className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-black dark:text-white p-2 w-full mb-2 rounded"
+              rows={3}
+              placeholder="Custom explanation for students (optional). Put each step on a new line."
+              value={q.explanation || ""}
+              onChange={(e) => handleQuestionChange(qIndex, "explanation", e.target.value)}
+            />
 
             {q.existingImage && !q.image && (
               <div className="mb-2">
